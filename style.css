@@ -1,0 +1,10 @@
+body{
+    background-image: url(luca-bravo-background_index_image.jpg);
+    width:100%;
+    height: auto;
+}
+h1{
+    font-size: 30px;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
