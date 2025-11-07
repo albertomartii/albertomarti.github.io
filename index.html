@@ -7,10 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="head_name">
-            <h1>Alberto Martí LLorens</h1>
-        </div>    
-    </header>
+<div class="liquidGlass-effect">
+        <h1>Hola</h1>
+    </div>
+    <div class="liquidGlass-wrapper">
+
+    </div>
+    <svg>
+        <filter id="glass-distortion">
+            <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.01 0.01"
+                numOctaves="1"
+                seed="5"
+                result="Turbulence"
+            />
+            <feGaussianBlur inf="turbulence"
+            stdDeviation="3" result="softMap"/>
+            <feDisplacementMap in="SourceGraphic"
+             in2="softMap" scale="150" />
+        </filter>
+    </svg>
+
 </body>
 </html>
