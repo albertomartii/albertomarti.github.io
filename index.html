@@ -7,27 +7,51 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="liquidGlass-wrapper">
-        <div class="liquidGlass-effect">
-            <h1>Botón</h1>
-        </div>
-    </div>
-    <svg>
-        <filter id="glass-distortion">
-            <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.01 0.01"
-                numOctaves="1"
-                seed="5"
-                result="Turbulence"
-            />
-            <feGaussianBlur inf="turbulence"
-            stdDeviation="3" result="softMap"/>
-            <feDisplacementMap in="SourceGraphic"
-             in2="softMap" scale="150" />
-        </filter>
-    </svg>
+  <div class="liquid-glass">Alberto Martí Llorens</div>
+  <div class="liquid-glass">IES El Caminàs</div>
+  <div class="liquid-glass">DAW</div>
 
+  <!-- SVG filter definition -->
+  <svg width="0" height="0">
+    <filter id="glass-distortion">
+      <feTurbulence
+        id="turbulence"
+        type="fractalNoise"
+        baseFrequency="0.005 0.005"
+        numOctaves="1"
+        seed="5"
+        result="turbulence"
+      />
+      <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap"/>
+      <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" />
+    </filter>
+  </svg>
+
+  <script>
+    const turbulence = document.getElementById("turbulence");
+    let mouseX = 0, mouseY = 0;
+    let targetX = 0, targetY = 0;
+    let raf;
+
+    document.addEventListener("mousemove", (e) => {
+      targetX = e.clientX / window.innerWidth;
+      targetY = e.clientY / window.innerHeight;
+      if (!raf) animate();
+    });
+
+    function animate() {
+      mouseX += (targetX - mouseX) * 0.1;
+      mouseY += (targetY - mouseY) * 0.1;
+
+      // La frecuencia se altera levemente según la posición del ratón
+      const freqX = 0.004 + mouseX * 0.003;
+      const freqY = 0.004 + mouseY * 0.003;
+
+      turbulence.setAttribute("baseFrequency", `${freqX} ${freqY}`);
+
+      // Vuelve a animar suavemente
+      raf = requestAnimationFrame(animate);
+    }
+  </script>
 </body>
 </html>
