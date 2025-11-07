@@ -19,7 +19,7 @@
 
     .liquid-glass {
       position: relative;
-      width: 400px;
+      width: auto;
       height: 200px;
       border-radius: 25px;
       background: rgba(255, 255, 255, 0.1);
@@ -36,6 +36,8 @@
       font-size: 1.8rem;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       margin: 20px;
+      padding-left: 50px;
+      padding-right: 50px;
     }
 
     .liquid-glass:hover {
@@ -48,24 +50,32 @@
   <div id="div1" class="liquid-glass" style="backdrop-filter: blur(10px) saturate(180%) url(#glass1);">Alberto Martí Llorens</div>
   <div id="div2" class="liquid-glass" style="backdrop-filter: blur(10px) saturate(180%) url(#glass2);">IES El Caminàs</div>
   <div id="div3" class="liquid-glass" style="backdrop-filter: blur(10px) saturate(180%) url(#glass3);">DAW</div>
+  <br>
+  <div id="div4" class="liquid-glass" style="backdrop-filter: blur(10px) saturate(180%) url(#glass4);">Lenguajes de programación:</div>
 
   <!-- Tres filtros SVG, uno por cada div -->
   <svg width="0" height="0">
     <filter id="glass1">
-      <feTurbulence id="turb1" type="fractalNoise" baseFrequency="0.004 0.004" numOctaves="1" seed="2" />
+      <feTurbulence id="turb1" type="fractalNoise" baseFrequency="0.004 0.004" numOctaves="1" seed="1" />
       <feGaussianBlur in="turb1" stdDeviation="3" result="softMap"/>
       <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" />
     </filter>
 
     <filter id="glass2">
-      <feTurbulence id="turb2" type="fractalNoise" baseFrequency="0.004 0.004" numOctaves="1" seed="5" />
+      <feTurbulence id="turb2" type="fractalNoise" baseFrequency="0.004 0.004" numOctaves="1" seed="2" />
       <feGaussianBlur in="turb2" stdDeviation="3" result="softMap"/>
       <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" />
     </filter>
 
     <filter id="glass3">
-      <feTurbulence id="turb3" type="fractalNoise" baseFrequency="0.004 0.004" numOctaves="1" seed="9" />
+      <feTurbulence id="turb3" type="fractalNoise" baseFrequency="0.004 0.004" numOctaves="1" seed="3" />
       <feGaussianBlur in="turb3" stdDeviation="3" result="softMap"/>
+      <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" />
+    </filter>
+
+    <filter id="glass4">
+      <feTurbulence id="turb4" type="fractalNoise" baseFrequency="0.004 0.004" numOctaves="1" seed="4" />
+      <feGaussianBlur in="turb4" stdDeviation="3" result="softMap"/>
       <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" />
     </filter>
   </svg>
@@ -74,12 +84,13 @@
     const turbulences = {
       div1: document.getElementById("turb1"),
       div2: document.getElementById("turb2"),
-      div3: document.getElementById("turb3")
+      div3: document.getElementById("turb3"),
+      div4: document.getElementById("turb4")
     };
 
-    const targets = { div1: [0, 0], div2: [0, 0], div3: [0, 0] };
-    const current = { div1: [0, 0], div2: [0, 0], div3: [0, 0] };
-    const animating = { div1: false, div2: false, div3: false };
+    const targets = { div1: [0, 0], div2: [0, 0], div3: [0, 0], div4: [0, 0] };
+    const current = { div1: [0, 0], div2: [0, 0], div3: [0, 0], div4: [0, 0] };
+    const animating = { div1: false, div2: false, div3: false, div4: false };
 
     Object.keys(turbulences).forEach(id => {
       const el = document.getElementById(id);
